@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aharada Kaushal Kumbh 2026 - Data Analytics Hackathon</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,9 +13,9 @@
         }
 
         body {
-            font-family: 'Arial', sans-serif;
-            background: #0a0e27;
-            color: #fff;
+            font-family: 'Poppins', sans-serif;
+            background: #000000;
+            color: #ffffff;
             overflow-x: hidden;
         }
 
@@ -43,15 +44,64 @@
             50% { opacity: 1; }
         }
 
+        /* Particle Background */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            animation: float-particle 20s infinite;
+        }
+
+        @keyframes float-particle {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px);
+                opacity: 0;
+            }
+        }
+
         /* Navigation */
         nav {
-            background: rgba(10, 14, 39, 0.95);
+            background: rgba(0, 0, 0, 0.98);
             padding: 1rem 0;
             position: sticky;
             top: 0;
             z-index: 1000;
             backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            animation: slideDown 0.5s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
 
         nav .container {
@@ -69,26 +119,20 @@
             gap: 15px;
         }
 
-        nav .logo img {
-            height: 60px;
+        /* SVG Logo Styling */
+        .logo-svg {
+            height: 70px;
             width: auto;
-            filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.5));
-            transition: all 0.3s;
+            transition: all 0.3s ease;
         }
 
-        nav .logo img:hover {
-            filter: drop-shadow(0 0 20px rgba(123, 47, 247, 0.8));
+        .logo-svg:hover {
+            filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.8));
             transform: scale(1.05);
         }
 
-        nav .logo-text {
-            font-size: 1.8rem;
-            font-weight: bold;
-            background: linear-gradient(135deg, #00d4ff, #7b2ff7);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+        .logo-svg text {
+            filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
         }
 
         nav ul {
@@ -100,12 +144,28 @@
         nav a {
             color: #fff;
             text-decoration: none;
-            transition: color 0.3s;
+            transition: all 0.3s;
             font-weight: 500;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: white;
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
         }
 
         nav a:hover {
-            color: #00d4ff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
         }
 
         /* Hero Section */
@@ -117,83 +177,127 @@
             justify-content: center;
             text-align: center;
             padding: 100px 20px;
-            background: radial-gradient(ellipse at center, rgba(123, 47, 247, 0.2) 0%, transparent 70%);
-        }
-
-        .hero-logo {
-            width: 300px;
-            height: auto;
-            margin: 0 auto 30px;
-            filter: drop-shadow(0 0 30px rgba(0, 212, 255, 0.6));
-            animation: float 3s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0px);
-            }
-            50% {
-                transform: translateY(-20px);
-            }
+            background: #000000;
+            overflow: hidden;
         }
 
         .hero-content {
             position: relative;
             z-index: 1;
-            max-width: 1000px;
+            max-width: 1200px;
+            animation: fadeInUp 1s ease-out;
         }
 
-        .hero h1 {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, #00d4ff, #7b2ff7, #ff00ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            animation: glow 2s infinite;
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Hero Logo - SVG */
+        .hero-logo-container {
+            margin: 0 auto 40px;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) scale(1);
+            }
+            50% {
+                transform: translateY(-30px) scale(1.02);
+            }
+        }
+
+        .hero-logo-svg {
+            width: 500px;
+            height: auto;
+            filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.6));
+        }
+
+        /* Animated SVG Text */
+        .animated-text {
+            animation: glow 3s ease-in-out infinite;
         }
 
         @keyframes glow {
-            0%, 100% { filter: drop-shadow(0 0 20px rgba(123, 47, 247, 0.5)); }
-            50% { filter: drop-shadow(0 0 40px rgba(0, 212, 255, 0.8)); }
+            0%, 100% {
+                filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+            }
+            50% {
+                filter: drop-shadow(0 0 25px rgba(255, 255, 255, 1));
+            }
+        }
+
+        .hero h1 {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            animation: titleReveal 1.2s ease-out 0.3s both;
+        }
+
+        @keyframes titleReveal {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+                letter-spacing: 10px;
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+                letter-spacing: 3px;
+            }
         }
 
         .hero .tagline {
+            font-family: 'Cormorant Garamond', serif;
             font-size: 1.8rem;
             margin-bottom: 2rem;
-            color: #00d4ff;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            color: #ffffff;
+            font-style: italic;
+            letter-spacing: 1px;
+            font-weight: 300;
+            animation: fadeIn 1.5s ease-out 0.6s both;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         .hero p {
             font-size: 1.2rem;
             margin-bottom: 3rem;
-            color: #ccc;
+            color: #cccccc;
             line-height: 1.8;
+            animation: fadeIn 1.5s ease-out 0.9s both;
         }
 
         .cta-button {
             display: inline-block;
-            background: linear-gradient(135deg, #00d4ff, #7b2ff7);
-            color: white;
-            padding: 18px 50px;
+            background: #ffffff;
+            color: #000000;
+            padding: 20px 60px;
             border-radius: 50px;
             text-decoration: none;
             font-weight: bold;
             font-size: 1.2rem;
             text-transform: uppercase;
             letter-spacing: 2px;
-            transition: all 0.3s;
-            box-shadow: 0 0 30px rgba(123, 47, 247, 0.5);
+            transition: all 0.4s ease;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
             position: relative;
             overflow: hidden;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 0 50px rgba(0, 212, 255, 0.8);
+            animation: fadeIn 1.5s ease-out 1.2s both;
         }
 
         .cta-button::before {
@@ -204,14 +308,19 @@
             width: 0;
             height: 0;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(0, 0, 0, 0.1);
             transform: translate(-50%, -50%);
             transition: width 0.6s, height 0.6s;
         }
 
         .cta-button:hover::before {
-            width: 300px;
-            height: 300px;
+            width: 400px;
+            height: 400px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 50px rgba(255, 255, 255, 0.8);
         }
 
         /* Container */
@@ -227,17 +336,49 @@
         section {
             padding: 100px 20px;
             position: relative;
+            animation: sectionFadeIn 1s ease-out;
+        }
+
+        @keyframes sectionFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         section h2 {
+            font-family: 'Cinzel Decorative', serif;
             font-size: 3rem;
             margin-bottom: 3rem;
             text-align: center;
             text-transform: uppercase;
             letter-spacing: 3px;
-            background: linear-gradient(135deg, #00d4ff, #7b2ff7);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: #ffffff;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, white, transparent);
+            animation: underlineGrow 1s ease-out;
+        }
+
+        @keyframes underlineGrow {
+            from { width: 0; }
+            to { width: 100px; }
         }
 
         .content-box {
@@ -245,8 +386,14 @@
             padding: 40px;
             border-radius: 20px;
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s;
+        }
+
+        .content-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(255, 255, 255, 0.1);
         }
 
         /* Prizes Section */
@@ -258,14 +405,30 @@
         }
 
         .prize-card {
-            background: linear-gradient(135deg, rgba(123, 47, 247, 0.2), rgba(0, 212, 255, 0.2));
+            background: rgba(255, 255, 255, 0.08);
             padding: 40px;
             border-radius: 20px;
-            border: 2px solid rgba(0, 212, 255, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.3);
             text-align: center;
-            transition: all 0.3s;
+            transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
+            animation: cardSlideUp 0.6s ease-out both;
+        }
+
+        .prize-card:nth-child(1) { animation-delay: 0.1s; }
+        .prize-card:nth-child(2) { animation-delay: 0.2s; }
+        .prize-card:nth-child(3) { animation-delay: 0.3s; }
+
+        @keyframes cardSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .prize-card::before {
@@ -275,8 +438,14 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(0, 212, 255, 0.1) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
             animation: rotate 10s linear infinite;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .prize-card:hover::before {
+            opacity: 1;
         }
 
         @keyframes rotate {
@@ -285,25 +454,33 @@
         }
 
         .prize-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 50px rgba(0, 212, 255, 0.3);
-            border-color: #00d4ff;
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 60px rgba(255, 255, 255, 0.3);
+            border-color: #ffffff;
+            background: rgba(255, 255, 255, 0.15);
         }
 
         .prize-number {
-            font-size: 4rem;
+            font-size: 5rem;
             font-weight: bold;
-            background: linear-gradient(135deg, #ffd700, #ff8c00);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: #ffffff;
             margin-bottom: 10px;
+            font-family: 'Cinzel Decorative', serif;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
 
         .prize-title {
             font-size: 1.5rem;
-            color: #00d4ff;
+            color: #ffffff;
             margin-bottom: 20px;
             text-transform: uppercase;
+            font-weight: 600;
         }
 
         /* Problem Statements */
@@ -318,40 +495,54 @@
             background: rgba(255, 255, 255, 0.05);
             padding: 30px;
             border-radius: 20px;
-            border: 1px solid rgba(0, 212, 255, 0.3);
-            transition: all 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.4s ease;
             backdrop-filter: blur(10px);
+            animation: cardSlideUp 0.6s ease-out both;
         }
 
+        .problem-card:nth-child(1) { animation-delay: 0.1s; }
+        .problem-card:nth-child(2) { animation-delay: 0.2s; }
+        .problem-card:nth-child(3) { animation-delay: 0.3s; }
+        .problem-card:nth-child(4) { animation-delay: 0.4s; }
+
         .problem-card:hover {
-            transform: translateY(-5px);
-            border-color: #00d4ff;
-            box-shadow: 0 15px 40px rgba(0, 212, 255, 0.2);
+            transform: translateY(-8px) rotate(1deg);
+            border-color: #ffffff;
+            box-shadow: 0 20px 50px rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.08);
         }
 
         .problem-card h3 {
-            color: #00d4ff;
+            color: #ffffff;
             margin-bottom: 20px;
             font-size: 1.4rem;
+            font-weight: 600;
         }
 
         .problem-card ul {
             list-style: none;
-            color: #ccc;
+            color: #cccccc;
         }
 
         .problem-card li {
             margin-bottom: 10px;
             padding-left: 25px;
             position: relative;
+            transition: all 0.3s;
         }
 
         .problem-card li::before {
             content: '▹';
             position: absolute;
             left: 0;
-            color: #7b2ff7;
+            color: #ffffff;
             font-size: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .problem-card:hover li::before {
+            left: 5px;
         }
 
         /* Rules */
@@ -364,11 +555,37 @@
             padding: 20px;
             margin-bottom: 15px;
             background: rgba(255, 255, 255, 0.05);
-            border-left: 4px solid #00d4ff;
+            border-left: 4px solid #ffffff;
             border-radius: 10px;
             counter-increment: item;
             position: relative;
             padding-left: 60px;
+            transition: all 0.3s;
+            animation: fadeInLeft 0.6s ease-out both;
+        }
+
+        .rules-list li:nth-child(1) { animation-delay: 0.1s; }
+        .rules-list li:nth-child(2) { animation-delay: 0.2s; }
+        .rules-list li:nth-child(3) { animation-delay: 0.3s; }
+        .rules-list li:nth-child(4) { animation-delay: 0.4s; }
+        .rules-list li:nth-child(5) { animation-delay: 0.5s; }
+        .rules-list li:nth-child(6) { animation-delay: 0.6s; }
+        .rules-list li:nth-child(7) { animation-delay: 0.7s; }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .rules-list li:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(10px);
         }
 
         .rules-list li::before {
@@ -377,7 +594,8 @@
             left: 20px;
             top: 50%;
             transform: translateY(-50%);
-            background: linear-gradient(135deg, #00d4ff, #7b2ff7);
+            background: #ffffff;
+            color: #000000;
             width: 30px;
             height: 30px;
             border-radius: 50%;
@@ -393,20 +611,40 @@
             margin-bottom: 30px;
             background: rgba(255, 255, 255, 0.05);
             border-radius: 15px;
-            border-left: 5px solid #00d4ff;
+            border-left: 5px solid #ffffff;
             backdrop-filter: blur(10px);
             transition: all 0.3s;
+            animation: fadeInRight 0.6s ease-out both;
+        }
+
+        .timeline-item:nth-child(1) { animation-delay: 0.1s; }
+        .timeline-item:nth-child(2) { animation-delay: 0.2s; }
+        .timeline-item:nth-child(3) { animation-delay: 0.3s; }
+        .timeline-item:nth-child(4) { animation-delay: 0.4s; }
+        .timeline-item:nth-child(5) { animation-delay: 0.5s; }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
 
         .timeline-item:hover {
-            transform: translateX(10px);
-            border-color: #7b2ff7;
+            transform: translateX(15px) scale(1.02);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
         }
 
         .timeline-item h3 {
-            color: #00d4ff;
+            color: #ffffff;
             margin-bottom: 10px;
             font-size: 1.5rem;
+            font-weight: 600;
         }
 
         /* Registration Form */
@@ -417,22 +655,40 @@
             padding: 50px;
             border-radius: 20px;
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: scaleIn 0.6s ease-out;
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
 
         .form-section {
             margin-bottom: 40px;
             padding: 30px;
-            background: rgba(0, 212, 255, 0.05);
+            background: rgba(255, 255, 255, 0.05);
             border-radius: 15px;
-            border: 1px solid rgba(0, 212, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s;
+        }
+
+        .form-section:hover {
+            background: rgba(255, 255, 255, 0.08);
         }
 
         .form-section h3 {
-            color: #00d4ff;
+            color: #ffffff;
             margin-bottom: 25px;
             font-size: 1.5rem;
             text-transform: uppercase;
+            font-weight: 600;
         }
 
         .form-row {
@@ -449,7 +705,7 @@
         .form-group label {
             display: block;
             margin-bottom: 10px;
-            color: #00d4ff;
+            color: #ffffff;
             font-weight: 600;
             text-transform: uppercase;
             font-size: 0.9rem;
@@ -460,7 +716,7 @@
             width: 100%;
             padding: 15px;
             background: rgba(255, 255, 255, 0.05);
-            border: 2px solid rgba(0, 212, 255, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.3);
             border-radius: 10px;
             color: #fff;
             font-size: 1rem;
@@ -470,29 +726,50 @@
         .form-group input:focus,
         .form-group select:focus {
             outline: none;
-            border-color: #00d4ff;
-            background: rgba(0, 212, 255, 0.1);
-            box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+            border-color: #ffffff;
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
         }
 
         .submit-button {
             width: 100%;
-            background: linear-gradient(135deg, #00d4ff, #7b2ff7);
-            color: white;
-            padding: 18px;
+            background: #ffffff;
+            color: #000000;
+            padding: 20px;
             border: none;
             border-radius: 10px;
             font-size: 1.2rem;
             font-weight: bold;
             text-transform: uppercase;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.4s;
             letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.1);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .submit-button:hover::before {
+            width: 500px;
+            height: 500px;
         }
 
         .submit-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 255, 255, 0.4);
         }
 
         .submit-button:disabled {
@@ -508,6 +785,18 @@
             margin-bottom: 20px;
             display: none;
             border: 1px solid #00ff00;
+            animation: slideInDown 0.5s ease-out;
+        }
+
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .error-message {
@@ -518,6 +807,7 @@
             margin-bottom: 20px;
             display: none;
             border: 1px solid #ff0000;
+            animation: slideInDown 0.5s ease-out;
         }
 
         /* Contact */
@@ -526,22 +816,51 @@
             font-size: 1.3rem;
         }
 
+        .contact-info p {
+            margin-bottom: 15px;
+            animation: fadeIn 0.6s ease-out both;
+        }
+
+        .contact-info p:nth-child(1) { animation-delay: 0.1s; }
+        .contact-info p:nth-child(2) { animation-delay: 0.2s; }
+        .contact-info p:nth-child(3) { animation-delay: 0.3s; }
+
         .contact-info a {
-            color: #00d4ff;
+            color: #ffffff;
             text-decoration: none;
-            transition: color 0.3s;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .contact-info a::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: white;
+            transition: width 0.3s;
+        }
+
+        .contact-info a:hover::after {
+            width: 100%;
         }
 
         .contact-info a:hover {
-            color: #7b2ff7;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
         }
 
         /* Footer */
         footer {
-            background: rgba(10, 14, 39, 0.95);
+            background: rgba(0, 0, 0, 0.98);
             text-align: center;
             padding: 40px 20px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        footer p {
+            animation: fadeIn 0.6s ease-out both;
         }
 
         /* Mobile Menu Toggle */
@@ -552,6 +871,23 @@
             color: white;
             font-size: 1.5rem;
             cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .menu-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        /* Scroll Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         @media (max-width: 768px) {
@@ -563,16 +899,12 @@
                 font-size: 1.2rem;
             }
 
-            .hero-logo {
-                width: 200px;
+            .hero-logo-svg {
+                width: 300px;
             }
 
-            nav .logo img {
-                height: 40px;
-            }
-
-            nav .logo-text {
-                font-size: 1.2rem;
+            .logo-svg {
+                height: 50px;
             }
 
             nav ul {
@@ -581,14 +913,16 @@
                 top: 100%;
                 left: 0;
                 right: 0;
-                background: rgba(10, 14, 39, 0.98);
+                background: rgba(0, 0, 0, 0.98);
                 flex-direction: column;
                 padding: 20px;
                 gap: 1rem;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             }
 
             nav ul.active {
                 display: flex;
+                animation: slideDown 0.3s ease-out;
             }
 
             .menu-toggle {
@@ -612,13 +946,26 @@
 <body>
     <!-- Animated Stars Background -->
     <div class="stars" id="stars"></div>
+    <div class="particles" id="particles"></div>
 
     <!-- Navigation -->
     <nav>
         <div class="container">
             <div class="logo">
-                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1400 800'%3E%3Cdefs%3E%3ClinearGradient id='grad1' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%2300d4ff;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%237b2ff7;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Ctext x='50' y='250' font-family='Arial, sans-serif' font-size='200' font-weight='bold' fill='url(%23grad1)' font-style='italic'%3EAharada%3C/text%3E%3Ctext x='50' y='450' font-family='Arial, sans-serif' font-size='280' font-weight='bold' fill='url(%23grad1)'%3Eकौशल कुंभ%3C/text%3E%3Ctext x='50' y='620' font-family='Arial, sans-serif' font-size='140' font-weight='bold' fill='url(%23grad1)'%3E2026%3C/text%3E%3Ctext x='50' y='730' font-family='Arial, sans-serif' font-size='60' fill='%2300d4ff'%3EEmpowering Skills through Data and Intelligence%3C/text%3E%3C/svg%3E" alt="AKK 2026 Logo">
-                <span class="logo-text">AKK 2026</span>
+                <svg class="logo-svg" viewBox="0 0 400 80" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <filter id="glow">
+                            <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                            <feMerge>
+                                <feMergeNode in="coloredBlur"/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
+                    </defs>
+                    <text x="10" y="25" font-family="'Cormorant Garamond', serif" font-size="22" font-style="italic" fill="white" filter="url(#glow)">Aharada</text>
+                    <text x="10" y="50" font-family="'Cinzel Decorative', serif" font-size="18" fill="white" filter="url(#glow)">कौशल कुंभ</text>
+                    <text x="10" y="70" font-family="'Cinzel Decorative', serif" font-size="16" font-weight="bold" fill="white" filter="url(#glow)">2026</text>
+                </svg>
             </div>
             <button class="menu-toggle" onclick="toggleMenu()">☰</button>
             <ul id="navMenu">
@@ -637,7 +984,48 @@
     <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="hero-content">
-            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1400 800'%3E%3Cdefs%3E%3ClinearGradient id='grad1' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%2300d4ff;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%237b2ff7;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Ctext x='50' y='250' font-family='Arial, sans-serif' font-size='200' font-weight='bold' fill='url(%23grad1)' font-style='italic'%3EAharada%3C/text%3E%3Ctext x='50' y='450' font-family='Arial, sans-serif' font-size='280' font-weight='bold' fill='url(%23grad1)'%3Eकौशल कुंभ%3C/text%3E%3Ctext x='50' y='620' font-family='Arial, sans-serif' font-size='140' font-weight='bold' fill='url(%23grad1)'%3E2026%3C/text%3E%3Ctext x='50' y='730' font-family='Arial, sans-serif' font-size='60' fill='%2300d4ff'%3EEmpowering Skills through Data and Intelligence%3C/text%3E%3C/svg%3E" alt="Aharada Kaushal Kumbh 2026" class="hero-logo">
+            <div class="hero-logo-container">
+                <svg class="hero-logo-svg" viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <filter id="heroGlow">
+                            <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+                            <feMerge>
+                                <feMergeNode in="coloredBlur"/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
+                        <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <animate attributeName="x1" values="0%;100%;0%" dur="5s" repeatCount="indefinite" />
+                            <animate attributeName="y1" values="0%;100%;0%" dur="5s" repeatCount="indefinite" />
+                            <stop offset="0%" style="stop-color:white;stop-opacity:1" />
+                            <stop offset="50%" style="stop-color:#f0f0f0;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:white;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    
+                    <g class="animated-text">
+                        <text x="50" y="80" font-family="'Cormorant Garamond', serif" font-size="60" font-style="italic" fill="url(#textGrad)" filter="url(#heroGlow)">
+                            Aharada
+                            <animate attributeName="opacity" values="1;0.7;1" dur="3s" repeatCount="indefinite" />
+                        </text>
+                        
+                        <text x="50" y="160" font-family="'Cinzel Decorative', serif" font-size="70" font-weight="bold" fill="url(#textGrad)" filter="url(#heroGlow)">
+                            कौशल कुंभ
+                            <animate attributeName="opacity" values="1;0.8;1" dur="3s" begin="0.5s" repeatCount="indefinite" />
+                        </text>
+                        
+                        <text x="50" y="215" font-family="'Cinzel Decorative', serif" font-size="45" font-weight="bold" fill="url(#textGrad)" filter="url(#heroGlow)">
+                            2026
+                            <animate attributeName="opacity" values="1;0.85;1" dur="3s" begin="1s" repeatCount="indefinite" />
+                        </text>
+                        
+                        <text x="50" y="250" font-family="'Cormorant Garamond', serif" font-size="20" font-style="italic" fill="white" filter="url(#heroGlow)">
+                            Empowering Skills through Data and Intelligence
+                            <animate attributeName="opacity" values="0.8;1;0.8" dur="3s" begin="1.5s" repeatCount="indefinite" />
+                        </text>
+                    </g>
+                </svg>
+            </div>
             <h1>Aharada Kaushal Kumbh 2026</h1>
             <p class="tagline">Empowering Skills Through Data Analytics & Data Science</p>
             <p>A national-level hackathon focused on Data Analytics and Data Science. Participants will solve real-world data problems and showcase their analytical and problem-solving skills. Join 1500+ participants in this exciting journey!</p>
@@ -646,7 +1034,7 @@
     </section>
 
     <!-- About Section -->
-    <section id="about">
+    <section id="about" class="reveal">
         <div class="container">
             <h2>About the Hackathon</h2>
             <div class="content-box">
@@ -658,7 +1046,7 @@
     </section>
 
     <!-- Prizes Section -->
-    <section id="prizes">
+    <section id="prizes" class="reveal">
         <div class="container">
             <h2>Prizes & Rewards</h2>
             <div class="prizes-grid">
@@ -679,17 +1067,17 @@
                 </div>
             </div>
             <div class="content-box" style="margin-top: 50px; text-align: center;">
-                <h3 style="color: #00d4ff; margin-bottom: 20px; font-size: 1.5rem;">FOR ALL PARTICIPANTS</h3>
+                <h3 style="color: #ffffff; margin-bottom: 20px; font-size: 1.5rem;">FOR ALL PARTICIPANTS</h3>
                 <p style="font-size: 1.2rem;">🎖️ Certificates | 🎁 Sponsor Goodies | 🎉 Swag & Surprises</p>
             </div>
         </div>
     </section>
 
     <!-- Problem Statements -->
-    <section id="problems">
+    <section id="problems" class="reveal">
         <div class="container">
             <h2>Problem Statements</h2>
-            <p style="text-align: center; margin-bottom: 50px; font-size: 1.2rem; color: #00d4ff;">Choose ONE problem statement for your team</p>
+            <p style="text-align: center; margin-bottom: 50px; font-size: 1.2rem; color: #ffffff;">Choose ONE problem statement for your team</p>
             <div class="problem-grid">
                 <div class="problem-card">
                     <h3>1. Data Cleaning & EDA</h3>
@@ -732,7 +1120,7 @@
     </section>
 
     <!-- Rules -->
-    <section id="rules">
+    <section id="rules" class="reveal">
         <div class="container">
             <h2>Rules & Regulations</h2>
             <div class="content-box rules-list">
@@ -750,7 +1138,7 @@
     </section>
 
     <!-- Registration -->
-    <section id="registration">
+    <section id="registration" class="reveal">
         <div class="container">
             <h2>Team Registration</h2>
             <div class="registration-form">
@@ -874,7 +1262,7 @@
     </section>
 
     <!-- Timeline -->
-    <section id="timeline">
+    <section id="timeline" class="reveal">
         <div class="container">
             <h2>Event Timeline</h2>
             <div class="content-box">
@@ -903,7 +1291,7 @@
     </section>
 
     <!-- Contact -->
-    <section id="contact">
+    <section id="contact" class="reveal">
         <div class="container">
             <h2>Contact Us</h2>
             <div class="content-box contact-info">
@@ -917,14 +1305,14 @@
     <!-- Footer -->
     <footer>
         <p>&copy; 2026 Aharada Kaushal Kumbh. All Rights Reserved.</p>
-        <p style="margin-top: 10px; color: #00d4ff;">Empowering the Next Generation of Data Scientists</p>
+        <p style="margin-top: 10px; color: #ffffff;">Empowering the Next Generation of Data Scientists</p>
     </footer>
 
     <script>
         // Create animated stars
         function createStars() {
             const starsContainer = document.getElementById('stars');
-            const numberOfStars = 100;
+            const numberOfStars = 150;
             
             for (let i = 0; i < numberOfStars; i++) {
                 const star = document.createElement('div');
@@ -936,7 +1324,23 @@
             }
         }
 
+        // Create animated particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const numberOfParticles = 30;
+            
+            for (let i = 0; i < numberOfParticles; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
         createStars();
+        createParticles();
 
         // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -963,6 +1367,24 @@
             menu.classList.remove('active');
         }
 
+        // Scroll reveal animation
+        function reveal() {
+            const reveals = document.querySelectorAll('.reveal');
+            
+            reveals.forEach(element => {
+                const windowHeight = window.innerHeight;
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    element.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', reveal);
+        reveal(); // Initial check
+
         // Form submission with Google Sheets
         document.getElementById('registrationForm').addEventListener('submit', async function(e) {
             e.preventDefault();
@@ -979,7 +1401,7 @@
             submitButton.disabled = true;
             submitButton.textContent = 'Submitting...';
             
-            // Collect form data in the exact order for Google Sheets
+            // Collect form data
             const formData = {
                 teamName: document.getElementById('teamName').value,
                 projectTitle: document.getElementById('projectTitle').value,
@@ -1002,7 +1424,6 @@
                 member4Course: document.getElementById('member4Course').value
             };
             
-            // REPLACE THIS URL WITH YOUR GOOGLE APPS SCRIPT WEB APP URL
             const scriptURL = 'https://script.google.com/macros/s/AKfycbyGzhuANdFEWLeyNsy16JrRODKJhnjj8FBUHNxCyjh-1auKUbcDUqyl8XVv5TpEWooTHA/exec';
             
             try {
@@ -1015,14 +1436,11 @@
                     body: JSON.stringify(formData)
                 });
                 
-                // Show success message
                 successMessage.textContent = '🎉 Registration Successful! Your team "' + formData.teamName + '" has been registered for AKK 2026. Check your email for confirmation.';
                 successMessage.style.display = 'block';
                 
-                // Reset form
                 this.reset();
                 
-                // Scroll to success message
                 successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 
             } catch (error) {
@@ -1033,6 +1451,15 @@
             } finally {
                 submitButton.disabled = false;
                 submitButton.textContent = 'Register Team';
+            }
+        });
+
+        // Add parallax effect to hero
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const heroContent = document.querySelector('.hero-content');
+            if (heroContent) {
+                heroContent.style.transform = 'translateY(' + (scrolled * 0.3) + 'px)';
             }
         });
     </script>
